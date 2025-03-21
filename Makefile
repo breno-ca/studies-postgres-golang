@@ -1,5 +1,6 @@
 include .env
 
+### Migrations
 POSTGRES_HOST=127.0.0.1
 POSTGRES_MIGRATIONS=./database/migrations
 DATA_SOURCE_NAME=postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(POSTGRES_HOST):$(POSTGRES_PORT)/$(POSTGRES_DB)
@@ -18,6 +19,7 @@ pg-connect:
 	@psql -h $(POSTGRES_HOST) -p $(POSTGRES_PORT) -U $(POSTGRES_USER) -d $(POSTGRES_DB)
 
 
+### Run project
 start:
 	docker compose build
 	docker compose up -d
@@ -25,3 +27,9 @@ start:
 
 stop:
 	docker compose down
+
+
+### Requests
+request:
+	bat -l HTTP --theme=Dracula $(name)
+	@hurl --color --variables-file=./test/vars.env $(name) | jq
