@@ -1,8 +1,8 @@
 package service
 
+import "net/http"
+
 type ProductService interface {
-	Create()
-	Read(id string)
-	Update(id string)
-	Delete(id string)
+	Insert(w http.ResponseWriter, r *http.Request)
+	Index(w http.ResponseWriter, r *http.Request)
 }
