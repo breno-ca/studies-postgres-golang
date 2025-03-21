@@ -16,3 +16,12 @@ migration-down:
 
 pg-connect:
 	@psql -h $(POSTGRES_HOST) -p $(POSTGRES_PORT) -U $(POSTGRES_USER) -d $(POSTGRES_DB)
+
+
+start:
+	docker compose build
+	docker compose up -d
+	make migration-up
+
+stop:
+	docker compose down
