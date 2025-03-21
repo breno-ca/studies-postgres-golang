@@ -15,9 +15,14 @@ const (
 	POSTGRES_USER     = "postgres"
 	POSTGRES_PASSWORD = "postgres"
 	POSTGRES_DB       = "postgres"
+
+	// Server
+	SERVER_PORT = ":8080"
 )
 
 type Config struct {
+	ServerPort string
+
 	PostgresConfig postgresConfig
 }
 
@@ -43,7 +48,13 @@ func NewConfig() Config {
 		os.Setenv("POSTGRES_DB", POSTGRES_DB)
 	}
 
-	return Config{}
+	if os.Getenv("SERVER_PORT") == "" {
+		os.Setenv("SERVER_PORT", SERVER_PORT)
+	}
+
+	return Config{
+		ServerPort: os.Getenv("SERVER_PORT"),
+	}
 }
 
 func (c Config) WithPostgres() Config {
