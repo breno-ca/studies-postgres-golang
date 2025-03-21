@@ -1,6 +1,6 @@
 FROM golang:1.24-alpine3.20
 
-WORKDIR /studies-postgres-golang
+WORKDIR /app
 
 COPY . .
 
